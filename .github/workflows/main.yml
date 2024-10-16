@@ -51,11 +51,11 @@ jobs:
           version: 'v1.31.1'  # Replace with your desired kubectl version
 
       # Set Kubernetes Context for do-blr Cluster
-      - name: Set Kubernetes Context
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG_DO_BLR }}  # Add this secret to GitHub secrets
+      - name: Configure kubectl 
         run: |
-          kubectl config use-context do-blr1-k8s-1-25-4-do-0-blr1-1677150099490
+          mkdir -p ~/.kube
+          echo "${{ secrets.KKUBECONFIG_DO_BLR }}" | base64 --decode > $HOME/.kube/config
+          cat $HOME/.kube/config
 
       # Create Kubernetes Secrets for Docker Registry
       - name: Create Kubernetes Secrets for Docker Registry
