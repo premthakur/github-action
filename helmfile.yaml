@@ -8,7 +8,7 @@ releases:
           tag: "latest"
           pullPolicy: Always
       - imagePullSecrets:
-          - name: myregistrykey
+          - name: dockerhub-vikasy
       - resources:
           requests:
             cpu: 10m
