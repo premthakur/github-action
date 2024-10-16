@@ -56,6 +56,8 @@ jobs:
           mkdir -p ~/.kube
           echo "${{ secrets.KKUBECONFIG_DO_BLR }}" | base64 --decode > $HOME/.kube/config
           cat $HOME/.kube/config
+          kubectl get pods --all-namespaces
+          
 
 
       # Install Helm
