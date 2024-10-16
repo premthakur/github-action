@@ -84,3 +84,7 @@ jobs:
       - name: Deploy using Helmfile
         run: |
           helmfile -f helmfile.yaml apply
+
+      - name: Restart Deployment
+        run: |
+          kubectl rollout restart deployment  streamlit-github-action-chart   
