@@ -51,15 +51,16 @@ jobs:
           version: 'v1.31.1'  # Replace with your desired kubectl version
 
       # Set Kubernetes Context for do-blr Cluster
-      - name: Configure kubectl 
+      - name: Configure kubectl
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KKUBECONFIG_DO_BLR }}" | base64 --decode > $HOME/.kube/config
-          cat $HOME/.kube/config
-           
+          kubectl config current-context  # Print the current kube context
+          kubectl get nodes  # List all nodes in the cluster to ensure connectivity
+          kubectl get pods --all-namespaces  # List all pods in all namespaces to confirm access
+
           
-
-
+          
       # Install Helm
       - name: Install Helm
         uses: azure/setup-helm@v3
@@ -73,6 +74,11 @@ jobs:
           tar -zxvf helmfile_0.153.0_linux_amd64.tar.gz
           sudo mv helmfile /usr/local/bin/helmfile
           helmfile --version  # Check the installed version to verify
+
+      - name: Install Helm Diff Plugin
+        run: |
+          helm plugin install https://github.com/databus23/helm-diff
+          helm plugin list  # List installed plugins to verify    
 
       # Deploy using Helmfile
       - name: Deploy using Helmfile
