@@ -9,6 +9,13 @@ releases:
           pullPolicy: Always
       - imagePullSecrets:
           - name: dockerhub-vikasy
+      - resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
       - serviceAccount:
           create: false
       - service:
