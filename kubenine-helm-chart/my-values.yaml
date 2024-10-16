@@ -1,0 +1,14 @@
+
+replicaCount: 1
+image:
+  repository: vikasy/flask-app-argocd
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets:
+  - name: dockerhub-vikasy
+
+service:
+  type: ClusterIP  # Set to LoadBalancer if needed
+  port: 5000

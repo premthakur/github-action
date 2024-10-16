@@ -1,0 +1,23 @@
+releases:
+  - name: streamlit-github-action
+    namespace: default
+    chart: ./kubenine-helm-chart
+    values:
+      - image:
+          repository: vikasy/streamlit-app
+          tag: "latest"
+          pullPolicy: Always
+      - imagePullSecrets:
+          - name: myregistrykey
+      - resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+      - serviceAccount:
+          create: false
+      - service:
+          port: 30036
+      
