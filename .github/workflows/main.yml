@@ -54,7 +54,7 @@ jobs:
       - name: Configure kubectl
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KKUBECONFIG_DO_BLR }}" | base64 --decode > $HOME/.kube/config
+          echo "${{ secrets.KUBECONFIG_DO_BLR }}" | base64 --decode > $HOME/.kube/config
           kubectl config current-context  # Print the current kube context
           kubectl get nodes  # List all nodes in the cluster to ensure connectivity
           kubectl get pods --all-namespaces  # List all pods in all namespaces to confirm access
